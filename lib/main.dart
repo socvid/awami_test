@@ -33,12 +33,16 @@ class MyApp extends StatelessWidget {
               children: [
                 Padding(
                   padding: EdgeInsets.all(20.0),
+                  //This is the Noto Nastaliq font, and it displays without problems.  It is here for comparison.
+                  //Notice the brackets face the correct way. Parentheses are fine. Kerning is not great.
                   child: Text('[1] آپ کیسے ہیں؟ ؁12 (غیر ملکی) ', textAlign: TextAlign.right, style: TextStyle(fontFamily: 'Noto', locale: Locale.fromSubtags(languageCode: 'ur')), textDirection: TextDirection.rtl),
                 ),
                 Padding(
                   padding: EdgeInsets.all(20.0),
+                  // This line doesn't crash the app when Arabic Sign Sanah (U+0601) is alone. Opening bracket
+                  // faces the wrong way. Kerning is amazing.
                   child: Text('[1] آپ کیسے ہیں؟ ؁ (غیر ملکی) ', textAlign: TextAlign.right, style: TextStyle(fontFamily: 'Awami', locale: Locale.fromSubtags(languageCode: 'ur')), textDirection: TextDirection.rtl),
-                  // This line crashes the app because of the Arabic Sign Sanah (U+0601).
+                  // This line crashes the app because of the joining of Arabic Sign Sanah (U+0601) with numbers.
                   // child: Text('[1] آپ کیسے ہیں؟ ؁12 (غیر ملکی) ', textAlign: TextAlign.right, style: TextStyle(fontFamily: 'Awami', locale: Locale.fromSubtags(languageCode: 'ur')), textDirection: TextDirection.rtl),
                 )
                 ])))));
