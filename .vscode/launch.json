@@ -1,0 +1,21 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Dart",
+            "program": "lib/main.dart",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "debug",
+            "args": [
+                "-v",
+                "--local-engine=android_debug_unopt_arm64",
+                "--local-engine-host=host_debug_unopt_arm64",
+                "--local-engine-src-path=/Volumes/Fast-2TB/Programming/engine/src",
+            ]
+        }
+    ]
+}

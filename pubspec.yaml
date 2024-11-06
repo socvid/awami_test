@@ -1,0 +1,41 @@
+name: awami_test
+description: "Test the Font Awami in a custom buit flutter engine with Graphite built into Harfbuzz"
+
+# Prevent accidental publishing to pub.dev.
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.5.4
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
+
+  # Enable generation of localized Strings from arb files.
+  generate: true
+
+  assets:
+    # Add assets from the images directory to the application.
+    - assets/images/
+
+  fonts:
+    - family: Awami
+      fonts:
+        - asset: assets/fonts/AwamiNastaliq-Regular.ttf
+    - family: Noto
+      fonts:
+        - asset: assets/fonts/NotoNastaliqUrdu-VariableFont_wght.ttf
+        # - asset: fonts/NotoNastaliqUrdu[wght].ttf
