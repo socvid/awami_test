@@ -35,7 +35,14 @@ flutter:
     - family: Awami
       fonts:
         - asset: assets/fonts/AwamiNastaliq-Regular.ttf
-    - family: Noto
+    - family: Noto3
       fonts:
         - asset: assets/fonts/NotoNastaliqUrdu-VariableFont_wght.ttf
-        # - asset: fonts/NotoNastaliqUrdu[wght].ttf
+    - family: Noto4
+      fonts:
+        - asset: assets/fonts/NotoNastaliqUrdu[wght].ttf
+    - family: Scheherazade
+      fonts:
+        - asset: assets/fonts/ScheherazadeNew-Regular.ttf
+        # - asset: fonts/Scheherazade-Bold.ttf
+        #   weight: 700
