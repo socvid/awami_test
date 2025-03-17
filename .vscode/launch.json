@@ -10,11 +10,14 @@
             "request": "launch",
             "type": "dart",
             "flutterMode": "debug",
+            //"flutterMode": "release",
             "args": [
                 "-v",
+                //"--local-engine=android_release_arm64",
+                //"--local-engine-host=host_release_arm64",
                 "--local-engine=android_debug_unopt_arm64",
                 "--local-engine-host=host_debug_unopt_arm64",
-                "--local-engine-src-path=/Volumes/Fast-2TB/Programming/engine/src",
+                "--local-engine-src-path=/Volumes/Fast-2TB/Programming/flutter/engine/src",
             ]
         }
     ]
