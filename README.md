@@ -1,29 +1,16 @@
-# awami_test
+# Awami Nastaliq Font Test App for Flutter
 
-A new Flutter project.
+A tool to test the [Awami Nastaliq font](https://software.sil.org/awami/download/) using a custom [Flutter engine](https://github.com/flutter/flutter) that
+builds [Graphite2](https://github.com/silnrsi/graphite) into HarfBuzz.  When you have successfully compiled your custom Flutter engine, the letters in Awami 
+will all connect as they do in the other fonts that also display in this app.  This app also shows issues with how Flutter interacts with Awami.  You can see
+brackets opening the wrong way and symbols that are supposed to combine with numbers either displaying side-by-side or even crashing the app.  Just tap on the
+different samples of issues to see the app toggle between different cases for comparison and even test out the functions that currently cause the app to crash.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application that follows the
-[simple app state management
-tutorial](https://flutter.dev/to/state-management-sample).
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Follow [this tutorial](https://huynq.dev/compiling-flutter-engine-locally-part-i) (and reference [this one](https://huynq.dev/compiling-flutter-engine-locally-part-iv?source=more_series_bottom_blogs) as well) to build your custom Flutter engine.  To add Graphite2 you will need to go into the third-party apps in the engine and 
+modify Harfbuzz's BUILD.gn file to include the Graphite2 flags and files and you will need to add the include folder and source folder for Grapthite2.
 
 ## Assets
 
-The `assets` directory houses images, fonts, and any other files you want to
-include with your application.
-
-The `assets/images` directory contains [resolution-aware
-images](https://flutter.dev/to/resolution-aware-images).
-
-## Localization
-
-This project generates localized messages based on arb files found in
-the `lib/src/localization` directory.
-
-To support additional languages, please visit the tutorial on
-[Internationalizing Flutter apps](https://flutter.dev/to/internationalization).
+The `assets` directory already has a few fonts for comparison with Awami.
