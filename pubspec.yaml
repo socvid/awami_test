@@ -1,5 +1,5 @@
 name: awami_test
-description: "Test the Font Awami in a custom buit flutter engine with Graphite built into Harfbuzz"
+description: "Test the font Awami Nastaliq in a custom buit flutter engine with Graphite2 built into Harfbuzz"
 
 # Prevent accidental publishing to pub.dev.
 publish_to: 'none'
