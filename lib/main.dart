@@ -21,7 +21,7 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key, required SettingsController settingsController,});
+  const MyApp({super.key, required SettingsController settingsController,});
 
   @override
   Widget build(BuildContext context) {
