@@ -33,6 +33,7 @@ flutter:
   fonts:
     - family: Awami
       fonts:
+        # - asset: assets/fonts/AwamiNastaliqDebug-Regular4.ttf
         - asset: assets/fonts/AwamiNastaliq-Regular.ttf
     - family: Noto3
       fonts:

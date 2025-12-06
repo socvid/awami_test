@@ -1,4 +1,4 @@
-synthetic-package: false
+#synthetic-package: false
 arb-dir: lib/src/localization
 #arb-dir: lib/i18n
 output-dir: lib/src/generated/i18n

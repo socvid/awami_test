@@ -10,7 +10,16 @@ class TestAwami extends StatefulWidget {
 class _TestAwamiState extends State<TestAwami> {
   final ScrollController controller = ScrollController();
   final ScrollController controller2 = ScrollController();
-  late List<bool> toggleTest = List.filled(10, false); 
+  late List<bool> toggleTest = List.filled(11, false);
+  static const String testDigits = '12';
+  double fontSize = 14;
+  static const fontSizeIncrement = 0.19;
+  static const bool hideChar = false;
+  static const String testString1stHalf = '[1] یہ تجربہ پیارا ہے؟ ';
+  static const String testString2ndHalf = ' (غیر ملکی)۔';// '; //Remove U+202f
+  //static const String testString1stHalf = 'سوووو'; //For AwamiNastaliqDebug-Regular5.ttf
+  //static const String testString2ndHalf = '0888';//For AwamiNastaliqDebug-Regular5.ttf
+
 
   void Function()? onTap (int index) {
     setState(() {
@@ -56,16 +65,20 @@ class _TestAwamiState extends State<TestAwami> {
                         //This is the Noto Nastaliq font, and it displays without problems.  It is here for comparison.
                         //Notice the brackets face the correct way. Parentheses are fine. Kerning is not great.
                         DataCell(toggleTest[0]
-                          ? const Text('اس کی ٹسٹ نہیں۔',
+                          ? Text('اس کی ٹسٹ نہیں۔',
                               textAlign: TextAlign.right,
                               style: TextStyle(
-                                  fontFamily: 'Noto3',
-                                  locale: Locale.fromSubtags(languageCode: 'ur')))
-                          : const Text('[1] یہ تجربہ پیارا ہے؟ ؁12 (غیر ملکی) ',
+                                        fontFamily: 'Noto3',
+                                        fontSize: fontSize,
+                                        locale: const Locale.fromSubtags(
+                                            languageCode: 'ur')))
+                          : Text('[1] یہ تجربہ پیارا ہے؟ ؁$testDigits (غیر ملکی) ',
                               textAlign: TextAlign.right,
                               style: TextStyle(
-                                  fontFamily: 'Noto3',
-                                  locale: Locale.fromSubtags(languageCode: 'ur')),
+                                        fontFamily: 'Noto3',
+                                        fontSize: fontSize,
+                                        locale: const Locale.fromSubtags(
+                                            languageCode: 'ur')),
                               textDirection: TextDirection.rtl),
                             onTap: () => onTap(0)),
                       ]),
@@ -79,18 +92,20 @@ class _TestAwamiState extends State<TestAwami> {
                           //This is the Noto Nastaliq font, and it displays without problems.  It is here for comparison.
                           //Notice the brackets face the correct way. Parentheses are fine. Kerning is not great.
                         DataCell(toggleTest[1]
-                          ? const Text('اس کی ٹسٹ نہیں۔',
+                          ? Text('اس کی ٹسٹ نہیں۔',
                               textAlign: TextAlign.right,
                               style: TextStyle(
-                                  fontFamily: 'Noto4',
-                                  locale:
-                                      Locale.fromSubtags(languageCode: 'ur')))
-                          : const Text('[1] یہ تجربہ پیارا ہے؟ ؁12 (غیر ملکی) ',
+                                      fontFamily: 'Noto4',
+                                      fontSize: fontSize,
+                                      locale: const Locale.fromSubtags(
+                                          languageCode: 'ur')))
+                          : Text('[1] یہ تجربہ پیارا ہے؟ ؁$testDigits (غیر ملکی) ',
                               textAlign: TextAlign.right,
                               style: TextStyle(
-                                  fontFamily: 'Noto4',
-                                  locale:
-                                      Locale.fromSubtags(languageCode: 'ur')),
+                                      fontFamily: 'Noto4',
+                                      fontSize: fontSize,
+                                      locale: const Locale.fromSubtags(
+                                          languageCode: 'ur')),
                               textDirection: TextDirection.rtl),
                               onTap: () => onTap(1),
                         ),
@@ -108,31 +123,32 @@ class _TestAwamiState extends State<TestAwami> {
                         DataCell(
                           RichText(
                               text: toggleTest[2]
-                              ? const TextSpan(
+                                    ? TextSpan(
+                                        text: 'اس کی ٹسٹ نہیں۔',
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: fontSize,
+                                            fontFamily: 'Scheherazade',
+                                            locale: const Locale.fromSubtags(
+                                                languageCode: 'ur',
+                                                scriptCode: 'Arab')),
+                                        children: [TextSpan(text: '\n')])
+                              : TextSpan(
                                   text:
-                                      'اس کی ٹسٹ نہیں۔',
+                                      '$testString1stHalf؁$testDigits$testString2ndHalf',
                                   style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 15,
-                                      fontFamily: 'Scheherazade',
-                                      locale: Locale.fromSubtags(
-                                          languageCode: 'ur',
-                                          scriptCode: 'Arab')))
-                              : const TextSpan(
-                                  text:
-                                      '[1] یہ تجربہ پیارا ہے؟ ؁12 (غیر ملکی) ',
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 15,
-                                      fontFamily: 'Scheherazade',
-                                      locale: Locale.fromSubtags(
-                                          languageCode: 'ur',
-                                          scriptCode: 'Arab'))),
+                                            color: Colors.black,
+                                            fontSize: fontSize,
+                                            fontFamily: 'Scheherazade',
+                                            locale: const Locale.fromSubtags(
+                                                languageCode: 'ur',
+                                                scriptCode: 'Arab')),
+                                                children: [TextSpan(text: '\n')]),
                               textDirection: TextDirection.rtl,
                               textAlign: TextAlign.right),
                               onTap: () => onTap(2)),
                         // This line crashes the app because of the joining of Arabic Sign Sanah (U+0601) with numbers.
-                        // child: Text('[1] یہ تجربہ پیارا ہے؟ ؁12 (غیر ملکی) ', textAlign: TextAlign.right, style: TextStyle(fontFamily: 'Awami', locale: Locale.fromSubtags(languageCode: 'ur')), textDirection: TextDirection.rtl),
+                        // child: Text('[1] یہ تجربہ پیارا ہے؟ ؁$testDigits (غیر ملکی) ', textAlign: TextAlign.right, style: TextStyle(fontFamily: 'Awami', locale: Locale.fromSubtags(languageCode: 'ur')), textDirection: TextDirection.rtl),
                       ]),
                       //Row 3
                       DataRow(cells: [
@@ -147,40 +163,45 @@ class _TestAwamiState extends State<TestAwami> {
                             //This is the Noto Nastaliq font, and it displays without problems.  It is here for comparison.
                             //Notice the brackets face the correct way. Parentheses are fine. Kerning is not great.
                             text: toggleTest[3]
-                            ? const TextSpan(
+                            ? TextSpan(
                                 text: 'اس کی ٹسٹ نہیں۔',
                                 style: TextStyle(
-                                    color: Colors.black,
-                                    fontFamily: 'Awami',
-                                    locale:
-                                        Locale.fromSubtags(languageCode: 'ur')))
-                            : const TextSpan(
-                                text: '؜[1] یہ تجربہ پیارا ہے؟ ',
+                                            color: Colors.black,
+                                            fontFamily: 'Awami',
+                                            fontSize: fontSize,
+                                            locale: const Locale.fromSubtags(
+                                                languageCode: 'ur')))
+                            : TextSpan(
+                                //text: '؜[1] یہ تجربہ پیارا ہے؟ ',
+                                text: '؜$testString1stHalf',
                                 style: TextStyle(
-                                    color: Colors.black,
-                                    fontFamily: 'Awami',
-                                    locale:
-                                        Locale.fromSubtags(languageCode: 'ur')),
+                                            color: Colors.black,
+                                            fontFamily: 'Awami',
+                                            fontSize: fontSize,
+                                            locale: const Locale.fromSubtags(
+                                                languageCode: 'ur')),
                                 children: <TextSpan>[
                                   TextSpan(
-                                      text: '؁12',
+                                      text: '؁$testDigits',
                                       style: TextStyle(
                                           fontFamily: 'Scheherazade',
-                                          fontSize: 20,
-                                          locale: Locale.fromSubtags(
+                                          fontSize: fontSize,
+                                          locale: const Locale.fromSubtags(
                                               languageCode: 'ur'))),
                                   TextSpan(
-                                      text: '(غیر ملکی) ',
+                                      //text: '(غیر ملکی) ',
+                                      text: testString2ndHalf,
                                       style: TextStyle(
                                           fontFamily: 'Awami',
-                                          locale: Locale.fromSubtags(
+                                          fontSize: fontSize,
+                                          locale: const Locale.fromSubtags(
                                               languageCode: 'ur')))
                                 ]),
                             textDirection: TextDirection.rtl,
                             textAlign: TextAlign.right),
                             onTap: () => onTap(3)),
                         // This line crashes the app because of the joining of Arabic Sign Sanah (U+0601) with numbers.
-                        // child: Text('[1] یہ تجربہ پیارا ہے؟ ؁12 (غیر ملکی) ', textAlign: TextAlign.right, style: TextStyle(fontFamily: 'Awami', locale: Locale.fromSubtags(languageCode: 'ur')), textDirection: TextDirection.rtl),
+                        // child: Text('[1] یہ تجربہ پیارا ہے؟ ؁$testDigits (غیر ملکی) ', textAlign: TextAlign.right, style: TextStyle(fontFamily: 'Awami', locale: Locale.fromSubtags(languageCode: 'ur')), textDirection: TextDirection.rtl),
                       ]),
                       //Row 4
                       DataRow(cells: [
@@ -192,28 +213,77 @@ class _TestAwamiState extends State<TestAwami> {
                         DataCell(
                           RichText(
                               text: toggleTest[4]
-                                  ? const TextSpan(
+                                  ? TextSpan(
                                       text:
-                                          '[1] یہ تجربہ پیارا ہے؟ ؁12 (غیر ملکی) ',
+                                          testString1stHalf,
                                       style: TextStyle(
                                           color: Colors.black,
                                           fontFamily: 'Awami',
-                                          locale: Locale.fromSubtags(
-                                              languageCode: 'ur')))
-                                  : const TextSpan(
+                                          fontSize: fontSize,
+                                          locale: const Locale.fromSubtags(
+                                              languageCode: 'ur')),
+                                      children: [
+                                          TextSpan(
+                                            text:
+                                                hideChar ? '' : '؁$testDigits',
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontFamily: 'Awami',
+                                                fontSize: fontSize,
+                                                locale:
+                                                    const Locale.fromSubtags(
+                                                        languageCode: 'ur')),
+                                          ),
+                                          TextSpan(
+                                            text: testString2ndHalf,
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontFamily: 'Awami',
+                                                fontSize: fontSize,
+                                                locale:
+                                                    const Locale.fromSubtags(
+                                                        languageCode: 'ur')),
+                                          ),
+                                          TextSpan(text: '\n')
+                                        ])
+                                  : TextSpan(
                                       text:
-                                          '[1] یہ تجربہ پیارا ہے؟ ؁ (غیر ملکی) ',
+                                          testString1stHalf,
                                       style: TextStyle(
                                           color: Colors.black,
                                           fontFamily: 'Awami',
-                                          locale: Locale.fromSubtags(
-                                              languageCode: 'ur'))),
+                                          fontSize: fontSize,
+                                          locale: const Locale.fromSubtags(
+                                              languageCode: 'ur')),
+                                      children: [
+                                          TextSpan(
+                                            text: hideChar ? '' : '؁',
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontFamily: 'Awami',
+                                                fontSize: fontSize,
+                                                locale:
+                                                    const Locale.fromSubtags(
+                                                        languageCode: 'ur')),
+                                          ),
+                                          TextSpan(
+                                            text: testString2ndHalf,
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontFamily: 'Awami',
+                                                fontSize: fontSize,
+                                                locale:
+                                                    const Locale.fromSubtags(
+                                                        languageCode: 'ur')),
+                                          ),
+                                          TextSpan(text: '\n')
+                                        ]),
                               textDirection: TextDirection.rtl,
                               textAlign: TextAlign.right),
                           onTap: () => onTap(4),
                         )
                         // This line crashes the app because of the joining of Arabic Sign Sanah (U+0601) with numbers.
-                        // child: Text('[1] یہ تجربہ پیارا ہے؟ ؁12 (غیر ملکی) ', textAlign: TextAlign.right, style: TextStyle(fontFamily: 'Awami', locale: Locale.fromSubtags(languageCode: 'ur')), textDirection: TextDirection.rtl),
+                        // child: Text('[1] یہ تجربہ پیارا ہے؟ ؁$testDigits (غیر ملکی) ', textAlign: TextAlign.right, style: TextStyle(fontFamily: 'Awami', locale: Locale.fromSubtags(languageCode: 'ur')), textDirection: TextDirection.rtl),
                       ]),
                       //Row 5
                       DataRow(cells: [
@@ -223,22 +293,70 @@ class _TestAwamiState extends State<TestAwami> {
                         DataCell(
                           RichText(
                               text: toggleTest[5]
-                                  ? const TextSpan(
+                                  ? TextSpan(
                                       text:
-                                          '[۱] یہ تجربہ پیارا ہے؟ ؀12 (غیر ملکی) ',
+                                          testString1stHalf,
                                       style: TextStyle(
                                           color: Colors.black,
                                           fontFamily: 'Awami',
-                                          locale: Locale.fromSubtags(
-                                              languageCode: 'ur')))
-                                  : const TextSpan(
+                                          fontSize: fontSize,
+                                          locale: const Locale.fromSubtags(
+                                              languageCode: 'ur')),
+                                                children:  [
+                                          TextSpan(
+                                            text: hideChar ? '' : '؀$testDigits',
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontFamily: 'Awami',
+                                                fontSize: fontSize,
+                                                locale:
+                                                    const Locale.fromSubtags(
+                                                        languageCode: 'ur')),
+                                          ),
+                                          TextSpan(
+                                            text: testString2ndHalf,
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontFamily: 'Awami',
+                                                fontSize: fontSize,
+                                                locale:
+                                                    const Locale.fromSubtags(
+                                                        languageCode: 'ur')),
+                                          ),
+                                          TextSpan(text: '\n')
+                                        ])
+                                  : TextSpan(
                                       text:
-                                          '[۱] یہ تجربہ پیارا ہے؟ ؀ (غیر ملکی) ',
+                                          testString1stHalf,
                                       style: TextStyle(
                                           color: Colors.black,
                                           fontFamily: 'Awami',
-                                          locale: Locale.fromSubtags(
-                                              languageCode: 'ur'))),
+                                          fontSize: fontSize,
+                                          locale: const Locale.fromSubtags(
+                                              languageCode: 'ur')),
+                                                children:  [
+                                          TextSpan(
+                                            text: hideChar ? '' : '؀',
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontFamily: 'Awami',
+                                                fontSize: fontSize,
+                                                locale:
+                                                    const Locale.fromSubtags(
+                                                        languageCode: 'ur')),
+                                          ),
+                                          TextSpan(
+                                            text: testString2ndHalf,
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontFamily: 'Awami',
+                                                fontSize: fontSize,
+                                                locale:
+                                                    const Locale.fromSubtags(
+                                                        languageCode: 'ur')),
+                                          ),
+                                          TextSpan(text: '\n')
+                                        ]),
                               textDirection: TextDirection.rtl,
                               textAlign: TextAlign.right),
                           onTap: () => onTap(5),
@@ -252,22 +370,70 @@ class _TestAwamiState extends State<TestAwami> {
                         DataCell(
                             RichText(
                                 text: toggleTest[6]
-                                    ? const TextSpan(
+                                    ? TextSpan(
                                         text:
-                                            '[1] یہ تجربہ پیارا ہے؟ ؂12 (غیر ملکی) ',
+                                            testString1stHalf,
                                         style: TextStyle(
-                                            color: Colors.black,
-                                            fontFamily: 'Awami',
-                                            locale: Locale.fromSubtags(
-                                                languageCode: 'ur')))
-                                    : const TextSpan(
+                                          color: Colors.black,
+                                          fontFamily: 'Awami',
+                                          fontSize: fontSize,
+                                          locale: const Locale.fromSubtags(
+                                              languageCode: 'ur')),
+                                                children:  [
+                                          TextSpan(
+                                            text: hideChar ? '' : '؂$testDigits',
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontFamily: 'Awami',
+                                                fontSize: fontSize,
+                                                locale:
+                                                    const Locale.fromSubtags(
+                                                        languageCode: 'ur')),
+                                          ),
+                                          TextSpan(
+                                            text: testString2ndHalf,
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontFamily: 'Awami',
+                                                fontSize: fontSize,
+                                                locale:
+                                                    const Locale.fromSubtags(
+                                                        languageCode: 'ur')),
+                                          ),
+                                          TextSpan(text: '\n')
+                                        ])
+                                    : TextSpan(
                                         text:
-                                            '[1] یہ تجربہ پیارا ہے؟ ؂ (غیر ملکی) ',
+                                            testString1stHalf,
                                         style: TextStyle(
-                                            color: Colors.black,
-                                            fontFamily: 'Awami',
-                                            locale: Locale.fromSubtags(
-                                                languageCode: 'ur'))),
+                                          color: Colors.black,
+                                          fontFamily: 'Awami',
+                                          fontSize: fontSize,
+                                          locale: const Locale.fromSubtags(
+                                              languageCode: 'ur')),
+                                                children:  [
+                                          TextSpan(
+                                            text: hideChar ? '' : '؂',
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontFamily: 'Awami',
+                                                fontSize: fontSize,
+                                                locale:
+                                                    const Locale.fromSubtags(
+                                                        languageCode: 'ur')),
+                                          ),
+                                          TextSpan(
+                                            text: testString2ndHalf,
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontFamily: 'Awami',
+                                                fontSize: fontSize,
+                                                locale:
+                                                    const Locale.fromSubtags(
+                                                        languageCode: 'ur')),
+                                          ),
+                                          TextSpan(text: '\n')
+                                        ]),
                                 textDirection: TextDirection.rtl,
                                 textAlign: TextAlign.right),
                           onTap: () => onTap(6),
@@ -281,20 +447,68 @@ class _TestAwamiState extends State<TestAwami> {
                         DataCell(
                             RichText(
                               text: toggleTest[7]
-                              ? const TextSpan(
-                                  text: '[1] یہ تجربہ پیارا ہے؟ ؃12 (غیر ملکی) ',
+                              ? TextSpan(
+                                  text: testString1stHalf,
                                   style: TextStyle(
-                                      color: Colors.black,
-                                      fontFamily: 'Awami',
-                                      locale: Locale.fromSubtags(
-                                          languageCode: 'ur')))
-                              : const TextSpan(
-                                  text: '[1] یہ تجربہ پیارا ہے؟ ؃ (غیر ملکی) ',
+                                        color: Colors.black,
+                                        fontFamily: 'Awami',
+                                        fontSize: fontSize,
+                                        locale: const Locale.fromSubtags(
+                                            languageCode: 'ur')),
+                                                children:  [
+                                          TextSpan(
+                                            text: hideChar ? '' : '؃$testDigits',
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontFamily: 'Awami',
+                                                fontSize: fontSize,
+                                                locale:
+                                                    const Locale.fromSubtags(
+                                                        languageCode: 'ur')),
+                                          ),
+                                          TextSpan(
+                                            text: testString2ndHalf,
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontFamily: 'Awami',
+                                                fontSize: fontSize,
+                                                locale:
+                                                    const Locale.fromSubtags(
+                                                        languageCode: 'ur')),
+                                          ),
+                                          TextSpan(text: '\n')
+                                        ])
+                              : TextSpan(
+                                  text: testString1stHalf,
                                   style: TextStyle(
-                                      color: Colors.black,
-                                      fontFamily: 'Awami',
-                                      locale: Locale.fromSubtags(
-                                          languageCode: 'ur'))),            
+                                        color: Colors.black,
+                                        fontFamily: 'Awami',
+                                        fontSize: fontSize,
+                                        locale: const Locale.fromSubtags(
+                                            languageCode: 'ur')),
+                                                children:  [
+                                          TextSpan(
+                                            text: hideChar ? '' : '؃',
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontFamily: 'Awami',
+                                                fontSize: fontSize,
+                                                locale:
+                                                    const Locale.fromSubtags(
+                                                        languageCode: 'ur')),
+                                          ),
+                                          TextSpan(
+                                            text: testString2ndHalf,
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontFamily: 'Awami',
+                                                fontSize: fontSize,
+                                                locale:
+                                                    const Locale.fromSubtags(
+                                                        languageCode: 'ur')),
+                                          ),
+                                          TextSpan(text: '\n')
+                                        ]),
                               textDirection: TextDirection.rtl,
                               textAlign: TextAlign.right,),
                           onTap: () => onTap(7),
@@ -310,22 +524,70 @@ class _TestAwamiState extends State<TestAwami> {
                         DataCell(
                           RichText(
                               text: toggleTest[8]
-                              ? const TextSpan(
+                              ? TextSpan(
                                   text:
-                                      '[1] یہ تجربہ پیارا ہے؟ ؄12 (غیر ملکی) ',
+                                      '$testString1stHalf؄',
                                   style: TextStyle(
-                                      color: Colors.black,
-                                      fontFamily: 'Scheherazade',
-                                      locale: Locale.fromSubtags(
-                                          languageCode: 'ur')))
-                              : const TextSpan(
+                                          color: Colors.black,
+                                          fontFamily: 'Scheherazade',
+                                          fontSize: fontSize,
+                                          locale: const Locale.fromSubtags(
+                                              languageCode: 'ur')),
+                                                children:  [
+                                          TextSpan(
+                                            text: testDigits,
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontFamily: 'Awami',
+                                                fontSize: fontSize,
+                                                locale:
+                                                    const Locale.fromSubtags(
+                                                        languageCode: 'ur')),
+                                          ),
+                                          TextSpan(
+                                            text: testString2ndHalf,
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontFamily: 'Awami',
+                                                fontSize: fontSize,
+                                                locale:
+                                                    const Locale.fromSubtags(
+                                                        languageCode: 'ur')),
+                                          ),
+                                          TextSpan(text: '\n')
+                                        ])
+                              : TextSpan(
                                   text:
-                                      '[1] یہ تجربہ پیارا ہے؟ ؄12 (غیر ملکی) ',
+                                      '$testString1stHalf؄',
                                   style: TextStyle(
-                                      color: Colors.black,
-                                      fontFamily: 'Awami',
-                                      locale: Locale.fromSubtags(
-                                          languageCode: 'ur'))),
+                                          color: Colors.black,
+                                          fontFamily: 'Awami',
+                                          fontSize: fontSize,
+                                          locale: const Locale.fromSubtags(
+                                              languageCode: 'ur')),
+                                                children:  [
+                                          TextSpan(
+                                            text: testDigits,
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontFamily: 'Awami',
+                                                fontSize: fontSize,
+                                                locale:
+                                                    const Locale.fromSubtags(
+                                                        languageCode: 'ur')),
+                                          ),
+                                          TextSpan(
+                                            text: testString2ndHalf,
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontFamily: 'Awami',
+                                                fontSize: fontSize,
+                                                locale:
+                                                    const Locale.fromSubtags(
+                                                        languageCode: 'ur')),
+                                          ),
+                                          TextSpan(text: '\n')
+                                        ]),
                               textDirection: TextDirection.rtl,
                               textAlign: TextAlign.right),
                           onTap: () => onTap(8),
@@ -341,25 +603,152 @@ class _TestAwamiState extends State<TestAwami> {
                         DataCell(
                           RichText(
                               text: toggleTest[9]
-                              ? const TextSpan(
+                              ? TextSpan(
                                   text:
-                                      '[1] یہ تجربہ پیارا ہے؟ ؅12 (غیر ملکی) ',
+                                      '$testString1stHalf؅',
                                   style: TextStyle(
-                                      color: Colors.black,
-                                      fontFamily: 'Scheherazade',
-                                      locale: Locale.fromSubtags(
-                                          languageCode: 'ur')))
-                              : const TextSpan(
+                                          color: Colors.black,
+                                          fontFamily: 'Scheherazade',
+                                          fontSize: fontSize,
+                                          locale: const Locale.fromSubtags(
+                                              languageCode: 'ur')),
+                                                children:  [
+                                          TextSpan(
+                                            text: testDigits,
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontFamily: 'Awami',
+                                                fontSize: fontSize,
+                                                locale:
+                                                    const Locale.fromSubtags(
+                                                        languageCode: 'ur')),
+                                          ),
+                                          TextSpan(
+                                            text: testString2ndHalf,
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontFamily: 'Awami',
+                                                fontSize: fontSize,
+                                                locale:
+                                                    const Locale.fromSubtags(
+                                                        languageCode: 'ur')),
+                                          ),
+                                          TextSpan(text: '\n')
+                                        ])
+                              : TextSpan(
                                   text:
-                                      '[1] یہ تجربہ پیارا ہے؟ ؅12 (غیر ملکی) ',
+                                      '$testString1stHalf؅',
                                   style: TextStyle(
                                       color: Colors.black,
                                       fontFamily: 'Awami',
-                                      locale: Locale.fromSubtags(
-                                          languageCode: 'ur'))),
+                                  fontSize: fontSize,
+                                  locale: const Locale.fromSubtags(
+                                          languageCode: 'ur')),
+                                                children:  [
+                                          TextSpan(
+                                            text: testDigits,
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontFamily: 'Awami',
+                                                fontSize: fontSize,
+                                                locale:
+                                                    const Locale.fromSubtags(
+                                                        languageCode: 'ur')),
+                                          ),
+                                          TextSpan(
+                                            text: testString2ndHalf,
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontFamily: 'Awami',
+                                                fontSize: fontSize,
+                                                locale:
+                                                    const Locale.fromSubtags(
+                                                        languageCode: 'ur')),
+                                          ),
+                                          TextSpan(text: '\n')
+                                        ]),
                               textDirection: TextDirection.rtl,
                               textAlign: TextAlign.right),
                           onTap: () => onTap(9),
+                        ),
+                      ]),
+                      //Row 10
+                      DataRow(cells: [
+                        DataCell(
+                              toggleTest[10]
+                                ? const Text('Scheherazade: (U+06DD\ndisplaying and\ncombining numbers)')
+                                : const Text('Awami: (U+06DD\ndisplaying and\ncombining numbers)'),
+                            onTap: () => onTap(10)),
+                        DataCell(
+                          RichText(
+                              text: toggleTest[10]
+                              ? TextSpan(
+                                  text:
+                                      '$testString1stHalf۝',
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontFamily: 'Scheherazade',
+                                  fontSize: fontSize,
+                                  locale: const Locale.fromSubtags(
+                                          languageCode: 'ur')),
+                                                children:  [
+                                          TextSpan(
+                                            text: testDigits,
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontFamily: 'Scheherazade',
+                                                fontSize: fontSize,
+                                                locale:
+                                                    const Locale.fromSubtags(
+                                                        languageCode: 'ur')),
+                                          ),
+                                          TextSpan(
+                                            text: testString2ndHalf,
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontFamily: 'Scheherazade',
+                                                fontSize: fontSize,
+                                                locale:
+                                                    const Locale.fromSubtags(
+                                                        languageCode: 'ur')),
+                                          ),
+                                          TextSpan(text: '\n')
+                                        ])
+                              : TextSpan(
+                                  text:
+                                      '$testString1stHalf۝',
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontFamily: 'Awami',
+                                  fontSize: fontSize,
+                                  locale: const Locale.fromSubtags(
+                                          languageCode: 'ur')),
+                                                children:  [
+                                          TextSpan(
+                                            text: testDigits,
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontFamily: 'Awami',
+                                                fontSize: fontSize,
+                                                locale:
+                                                    const Locale.fromSubtags(
+                                                        languageCode: 'ur')),
+                                          ),
+                                          TextSpan(
+                                            text: testString2ndHalf,
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontFamily: 'Awami',
+                                                fontSize: fontSize,
+                                                locale:
+                                                    const Locale.fromSubtags(
+                                                        languageCode: 'ur')),
+                                          ),
+                                          TextSpan(text: '\n')
+                                        ]),
+                              textDirection: TextDirection.rtl,
+                              textAlign: TextAlign.right),
+                          onTap: () => onTap(10),
                         ),
                       ]),
                     ]),
@@ -368,6 +757,18 @@ class _TestAwamiState extends State<TestAwami> {
           ),
         ),
       ),
+      persistentFooterButtons: [
+        TextButton(
+            onPressed: () => setState(() {
+                  fontSize -= fontSizeIncrement;
+                }),
+            child: const Text('-')),
+        TextButton(
+            onPressed: () => setState(() {
+                  fontSize += fontSizeIncrement;
+                }),
+            child: const Text('+')),
+      ],
     );
   }
 }
