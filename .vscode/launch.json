@@ -15,9 +15,9 @@
                 "-v",
                 //"--local-engine=android_release_arm64",
                 //"--local-engine-host=host_release_arm64",
-                "--local-engine=android_debug_unopt_arm64",
-                "--local-engine-host=host_debug_unopt_arm64",
-                "--local-engine-src-path=/Volumes/Fast-2TB/Programming/flutter-3.35.5-with-patch/engine/src",
+                //"--local-engine=android_debug_unopt_arm64",
+                //"--local-engine-host=host_debug_unopt_arm64",
+                //"--local-engine-src-path=/Volumes/Fast-2TB/Programming/flutter-3.35.5-with-patch/engine/src",
             ]
         }
     ]

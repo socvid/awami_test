@@ -44,3 +44,6 @@ app.*.map.json
 /android/app/.cxx
 /patches
 /test-results
+
+# FVM Version Cache
+.fvm/

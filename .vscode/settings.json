@@ -1,5 +1,6 @@
 {
   "java.configuration.updateBuildConfiguration": "interactive",
-    "dart.flutterSdkPath": "/Volumes/Fast-2TB/Programming/flutter-3.35.5-with-patch/bin",
-    "dart.sdkPath": "/Volumes/Fast-2TB/Programming/flutter-3.35.5-with-patch/bin/cache/dart-sdk",
+  "dart.flutterSdkPath": "/Users/dcode/fvm/versions/patch/stable/bin",
+  "dart.sdkPath": "/Users/dcode/fvm/versions/patch/stable/bin/cache/dart-sdk",
+  "cmake.sourceDirectory": "/Users/dcode/Development/GitHub/awami_test/linux"
 }
